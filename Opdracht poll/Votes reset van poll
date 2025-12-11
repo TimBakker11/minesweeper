@@ -1,0 +1,27 @@
+import sqlite3
+
+DB = "poll.db"
+BEVEILIGINGSWOORD = "RESET123"
+
+def clear_votes_and_reset_id():
+    woord = input("Voer het beveiligingswoord in om alle stemmen te verwijderen en de ID te resetten: ").strip()
+    if woord != BEVEILIGINGSWOORD:
+        print("Onjuist woord! Actie geannuleerd.")
+        return
+
+    conn = sqlite3.connect(DB)
+    cur = conn.cursor()
+
+    # Verwijder alle stemmen
+    cur.execute("DELETE FROM votes")
+
+    # Reset de AUTOINCREMENT van de tabel
+    cur.execute("DELETE FROM sqlite_sequence WHERE name='votes'")
+
+    conn.commit()
+    conn.close()
+
+    print("Alle stemmen verwijderd en de ID-teller is gereset!")
+
+# Uitvoeren
+clear_votes_and_reset_id()

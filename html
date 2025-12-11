@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Betalingscalculator</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+background: #f5f5f5;
+padding: 30px;
+}
+.container {
+max-width: 400px;
+margin: auto;
+background: white;
+padding: 20px;
+border-radius: 12px;
+box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+h2 { text-align: center; }
+input {
+width: 100%;
+padding: 10px;
+margin: 10px 0;
+border: 1px solid #ccc;
+border-radius: 8px;
+font-size: 16px;
+}
+button {
+width: 100%;
+padding: 10px;
+font-size: 16px;
+border: none;
+border-radius: 8px;
+background: #4caf50;
+color: white;
+cursor: pointer;
+margin-top: 10px;
+}
+button:hover { background: #45a049; }
+.output {
+margin-top: 20px;
+font-size: 18px;
+background: #eef;
+padding: 15px;
+border-radius: 8px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h2>Betalingscalculator</h2>
+
+
+<h3>Bedragen invoeren</h3>
+<input type="number" id="bedragInput" placeholder="Voer bedrag in" step="0.01">
+<button onclick="voegBedragToe()">Toevoegen</button>
+
+
+<div class="output" id="totaalWeergave">Totaal: € 0.00</div>
+
+
+<h3>Betalen</h3>
+</html>

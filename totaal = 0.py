@@ -39,3 +39,7 @@ if verschil > 0:
     print(f"\nWisselgeld: € {verschil:.2f}")
 else:
     print("\nBedrag is betaald. Bedankt!")
+    if verschil > -1: 
+        print("\nFBI komt je halen")
+    else:
+        print("\nGoed Zo")

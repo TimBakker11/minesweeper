@@ -1,0 +1,81 @@
+import sqlite3
+import os
+
+DB = "poll.db"
+
+# Dit bereid de database voor.
+def setup_db():
+    conn = sqlite3.connect(DB)
+    cur = conn.cursor()
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS votes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        naam TEXT UNIQUE,
+        vote TEXT CHECK(vote IN ('ja','nee'))
+    )
+    """)
+
+    conn.commit()
+    conn.close()
+setup_db()
+def gebruiker_heeft_gestemd(naam):
+    #Dit controleert of gebruiker al in database staat.
+    conn = sqlite3.connect(DB)
+    cur = conn.cursor()
+
+    cur.execute("SELECT vote FROM votes WHERE naam = ?", (naam,))
+    resultaat = cur.fetchone()
+
+    conn.close()
+    return resultaat is not None
+def sla_stem_op(naam, stem):
+    """Sla stem op in database."""
+    conn = sqlite3.connect(DB)
+    cur = conn.cursor()
+    try:
+        cur.execute("INSERT INTO votes (naam, vote) VALUES (?, ?)", (naam, stem))
+        conn.commit()
+    except sqlite3.IntegrityError:
+        pass  # gebruiker bestaat al
+
+    conn.close()
+def toon_resultaten():
+    #Dit telt de 'ja' en 'nee'
+    conn = sqlite3.connect(DB)
+    cur = conn.cursor()
+
+    cur.execute("SELECT vote, COUNT(*) FROM votes GROUP BY vote")
+    rows = cur.fetchall()
+    conn.close()
+    
+    ja = 0
+    nee = 0
+
+    for vote, aantal in rows:
+        if vote == "ja":
+            ja = aantal
+        elif vote == "nee":
+            nee = aantal
+
+    print("\n--- Uitslag van de poll ---")
+    print(f"Ja : {ja}")
+    print(f"Nee: {nee}")
+    print("---------------------------\n")
+
+print("Welkom bij de poll!")
+print("Vraag: Vind je Python leuk?\n")
+
+naam = input("Voer je naam in: ").strip()
+
+if gebruiker_heeft_gestemd(naam):
+    print("\nJe hebt al gestemd!")
+else:
+    stem = ""
+    while stem not in ("ja", "nee"):
+        stem = input("Antwoord (ja/nee): ").lower().strip()
+
+    sla_stem_op(naam, stem)
+    print("\nBedankt voor het stemmen!")
+
+toon_resultaten()
