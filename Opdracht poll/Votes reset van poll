@@ -12,10 +12,10 @@ def clear_votes_and_reset_id():
     conn = sqlite3.connect(DB)
     cur = conn.cursor()
 
-    # Verwijder alle stemmen
+    # Verwijderd alle stemmen
     cur.execute("DELETE FROM votes")
 
-    # Reset de AUTOINCREMENT van de tabel
+    # Reset de ID van de tabel
     cur.execute("DELETE FROM sqlite_sequence WHERE name='votes'")
 
     conn.commit()
@@ -23,5 +23,5 @@ def clear_votes_and_reset_id():
 
     print("Alle stemmen verwijderd en de ID-teller is gereset!")
 
-# Uitvoeren
+# Dit voert het uit
 clear_votes_and_reset_id()
