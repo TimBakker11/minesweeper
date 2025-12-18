@@ -18,7 +18,11 @@ def setup_db():
 
     conn.commit()
     conn.close()
+
 setup_db()
+
+
+
 def gebruiker_heeft_gestemd(naam):
     #Dit controleert of gebruiker al in database staat.
     conn = sqlite3.connect(DB)
@@ -78,4 +82,3 @@ else:
     sla_stem_op(naam, stem)
     print("\nBedankt voor het stemmen!")
 
-toon_resultaten()

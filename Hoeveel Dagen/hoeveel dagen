@@ -1,0 +1,25 @@
+import datetime
+
+# Datum van vandaag command
+vandaag = datetime.date.today()
+
+user_datum = input("Voer een datum in (DD-MM-YYYY): ")
+
+try:
+    # zet het tekst om in een datum
+    ingevoerde_datum = datetime.datetime.strptime(user_datum, "%d-%m-%Y").date()
+    print("Je hebt", ingevoerde_datum, "ingevoerd")
+
+# berekent het verschil kwa dagen
+    verschil = ingevoerde_datum - vandaag
+    dagen = verschil.days
+
+    if dagen > 0:
+        print(f"De ingevoerde datum is over {dagen} dagen")
+    elif dagen < 0:
+        print(f"De ingevoerde datum was {abs(dagen)} dagen geleden")
+    else:
+        print("Dat is vandaag!")
+# Als het niet lukt gebruikt die deze command
+except ValueError:
+    print("Gebruik het formaat DD-MM-YYYY")
