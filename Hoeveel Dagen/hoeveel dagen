@@ -1,6 +1,6 @@
 import datetime
 
-# Datum van vandaag command
+# Datum van vandaag variable
 vandaag = datetime.date.today()
 
 user_datum = input("Voer een datum in (DD-MM-YYYY): ")
