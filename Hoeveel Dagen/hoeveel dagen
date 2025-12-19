@@ -1,25 +1,25 @@
-import datetime
+import datetime # date-module
 
-# Datum van vandaag variable
+# Datum van vandaag variable en geeft de huide datum terug en wordt opgeslagen in de variable vandaag
 vandaag = datetime.date.today()
-
+# dit is een string dus je voert tekst hier in
 user_datum = input("Voer een datum in (DD-MM-YYYY): ")
 
 try:
-    # zet het tekst om in een datum
+    # zet het tekst om in een datum en strptime maakt dus eerst een datetime
     ingevoerde_datum = datetime.datetime.strptime(user_datum, "%d-%m-%Y").date()
     print("Je hebt", ingevoerde_datum, "ingevoerd")
 
-# berekent het verschil kwa dagen
+# berekent het verschil kwa dagen (variable) ingevoerde_datum en vandaag zijn date-objecten van datetime.date
     verschil = ingevoerde_datum - vandaag
     dagen = verschil.days
 
-    if dagen > 0:
+    if dagen > 0: #als dagen boven 0 is dan zegt het programma over hoeveel dagen is
         print(f"De ingevoerde datum is over {dagen} dagen")
-    elif dagen < 0:
+    elif dagen < 0: #anders als dagen lager dan 0 is, zegt het programma hoeveel dagen het geleden is
         print(f"De ingevoerde datum was {abs(dagen)} dagen geleden")
-    else:
+    else: # anders zegt het programma dat het vandaag was (zelfde datum)
         print("Dat is vandaag!")
-# Als het niet lukt gebruikt die deze command
+# Als het niet lukt gebruikt die deze command, want dan heb je het formaat niet gebruikt
 except ValueError:
     print("Gebruik het formaat DD-MM-YYYY")
